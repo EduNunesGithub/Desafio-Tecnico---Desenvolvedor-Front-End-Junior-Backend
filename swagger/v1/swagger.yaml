@@ -1,0 +1,219 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/companies":
+    post:
+      summary: Create a company
+      tags:
+      - Companies
+      parameters: []
+      responses:
+        '201':
+          description: company created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                cnpj:
+                  type: string
+                company_name:
+                  type: string
+                phone:
+                  type: string
+                whatsapp:
+                  type: string
+              required:
+              - address
+              - cnpj
+              - company_name
+              - phone
+              - whatsapp
+        required: true
+    get:
+      summary: Retrieve all companies
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: companies found
+  "/companies/{id}":
+    get:
+      summary: Retrieve a specific company
+      tags:
+      - Companies
+      parameters:
+      - name: id
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: company found
+        '404':
+          description: company not found
+    put:
+      summary: Update a company
+      tags:
+      - Companies
+      parameters:
+      - name: id
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: company updated
+        '422':
+          description: invalid request
+    delete:
+      summary: Delete a company
+      tags:
+      - Companies
+      parameters:
+      - name: id
+        in: path
+        description: Company ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: company deleted
+        '404':
+          description: company not found
+  "/vehicles":
+    post:
+      summary: Create a vehicle
+      tags:
+      - Vehicles
+      parameters: []
+      responses:
+        '201':
+          description: vehicle created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: object
+                  properties:
+                    heading:
+                      type: string
+                    paragraph:
+                      type: string
+                features:
+                  type: object
+                  properties:
+                    consumption:
+                      type: string
+                    engine:
+                      type: string
+                    power:
+                      type: string
+                    speed:
+                      type: string
+                image:
+                  type: object
+                  properties:
+                    mobile:
+                      type: string
+                    desktop:
+                      type: string
+                legal_text:
+                  type: string
+                price:
+                  type: number
+                subheading:
+                  type: string
+                video:
+                  type: string
+              required:
+              - name
+              - description
+              - features
+              - image
+              - legal_text
+              - price
+              - subheading
+              - video
+        required: true
+    get:
+      summary: Retrieve all vehicles
+      tags:
+      - Vehicles
+      responses:
+        '200':
+          description: vehicles found
+  "/vehicles/{id}":
+    get:
+      summary: Retrieve a specific vehicle
+      tags:
+      - Vehicles
+      parameters:
+      - name: id
+        in: path
+        description: Vehicle ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: vehicle found
+        '404':
+          description: vehicle not found
+    put:
+      summary: Update a vehicle
+      tags:
+      - Vehicles
+      parameters:
+      - name: id
+        in: path
+        description: Vehicle ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: vehicle updated
+        '422':
+          description: invalid request
+    delete:
+      summary: Delete a vehicle
+      tags:
+      - Vehicles
+      parameters:
+      - name: id
+        in: path
+        description: Vehicle ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: vehicle deleted
+        '404':
+          description: vehicle not found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: rails-api-challenge-damp-feather-1837.fly.dev
